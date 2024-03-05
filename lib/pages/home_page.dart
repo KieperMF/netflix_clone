@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _load() async {
     await request.nowPlayingRequest();
-    setState(() {});
   }
 
   @override
@@ -29,58 +28,63 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Netflix"),
       ),
       backgroundColor: Colors.grey[900],
-      body: Center(
-        child: Column(
-          children: [
-            ListenableBuilder(
-                listenable: request,
-                builder: (context, _) {
-                  if (request.moviesNowPlaying != null) {
-                    return Column(
-                      children: [
-                        const Padding(padding: EdgeInsets.all(10),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Lançamentos',
-                            style: TextStyle(color: Colors.white, fontSize: 22),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              ListenableBuilder(
+                  listenable: request,
+                  builder: (context, _) {
+                    if (request.moviesNowPlaying != null) {
+                      return Column(
+                        children: [
+                          const Padding(padding: EdgeInsets.all(10),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'Lançamentos',
+                              style: TextStyle(color: Colors.white, fontSize: 22),
+                            ),
+                          ),),
+                          SizedBox(
+                            height: 300,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: request.moviesNowPlaying!.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: SizedBox(
+                                        width: 150,
+                                        child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 190,
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: Image.network(
+                                                    '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                          ),
+                                          Text(
+                                            request
+                                                .moviesNowPlaying![index].title,
+                                            style: const TextStyle(
+                                                color: Colors.white, fontSize: 18),
+                                          )
+                                        ],
+                                      ),
+                                      ));
+                                }),
                           ),
-                        ),),
-                        SizedBox(
-                          height: 250,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: request.moviesNowPlaying!.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 170,
-                                          child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              child: Image.network(
-                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                        ),
-                                        Text(
-                                          request
-                                              .moviesNowPlaying![index].title,
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                        )
-                                      ],
-                                    ));
-                              }),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return const Text("Erro ao carregar filmes");
-                  }
-                })
-          ],
+                        ],
+                      );
+                    } else {
+                      return const Text("Erro ao carregar filmes");
+                    }
+                  })
+            ],
+          ),
         ),
       ),
     );
