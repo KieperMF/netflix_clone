@@ -38,6 +38,14 @@ class _HomePageState extends State<HomePage> {
                   if (request.moviesNowPlaying != null) {
                     return Column(
                       children: [
+                        const Padding(padding: EdgeInsets.all(10),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Lançamentos',
+                            style: TextStyle(color: Colors.white, fontSize: 22),
+                          ),
+                        ),),
                         SizedBox(
                           height: 250,
                           child: ListView.builder(
