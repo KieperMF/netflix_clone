@@ -28,37 +28,51 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Netflix"),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              ListenableBuilder(
-                  listenable: request,
-                  builder: (context, _) {
-                    if (request.moviesNowPlaying != null) {
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: request.moviesNowPlaying!.length,
-                          itemBuilder: (context, index) {
-                            return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                        height: 200,
-                                        width: 200,
-                                        child: Image.network(
-                                            '${request.urlData.poster}${request.moviesNowPlaying![index].poster}'))
-                                  ],
-                                ));
-                          });
-                    } else {
-                      return const Text("Erro ao carregar filmes");
-                    }
-                  })
-            ],
-          ),
+      backgroundColor: Colors.grey[900],
+      body: Center(
+        child: Column(
+          children: [
+            ListenableBuilder(
+                listenable: request,
+                builder: (context, _) {
+                  if (request.moviesNowPlaying != null) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 250,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: request.moviesNowPlaying!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 170,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              child: Image.network(
+                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                        ),
+                                        Text(
+                                          request
+                                              .moviesNowPlaying![index].title,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ));
+                              }),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Text("Erro ao carregar filmes");
+                  }
+                })
+          ],
         ),
       ),
     );
