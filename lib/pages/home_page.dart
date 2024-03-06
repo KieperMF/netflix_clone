@@ -25,8 +25,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Netflix"),
-      ),
+          backgroundColor: Colors.black,
+          title: const Align(
+            alignment: Alignment.center,
+            child: Text(
+              "Netflix",
+              style: TextStyle(
+                  color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+          )),
       backgroundColor: Colors.grey[900],
       body: SingleChildScrollView(
         child: Center(
@@ -38,14 +45,17 @@ class _HomePageState extends State<HomePage> {
                     if (request.moviesNowPlaying != null) {
                       return Column(
                         children: [
-                          const Padding(padding: EdgeInsets.all(10),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Lançamentos',
-                              style: TextStyle(color: Colors.white, fontSize: 22),
+                          const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Lançamentos',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 22),
+                              ),
                             ),
-                          ),),
+                          ),
                           SizedBox(
                             height: 300,
                             child: ListView.builder(
@@ -57,23 +67,23 @@ class _HomePageState extends State<HomePage> {
                                       child: SizedBox(
                                         width: 150,
                                         child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 190,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.network(
-                                                    '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                          ),
-                                          Text(
-                                            request
-                                                .moviesNowPlaying![index].title,
-                                            style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
-                                          )
-                                        ],
-                                      ),
+                                          children: [
+                                            SizedBox(
+                                              height: 190,
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: Image.network(
+                                                      '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                            ),
+                                            Text(
+                                              request.moviesNowPlaying![index].title,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            )
+                                          ],
+                                        ),
                                       ));
                                 }),
                           ),
