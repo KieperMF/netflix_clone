@@ -30,7 +30,7 @@ class HttpRequest extends ChangeNotifier{
       topMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     }catch(e){
-
+      print("Erro $e");
     }
   }
 }

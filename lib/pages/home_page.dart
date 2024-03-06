@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _load() async {
     await request.nowPlayingRequest();
+    await request.topMoviesRequest();
   }
 
   @override
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               ListenableBuilder(
                   listenable: request,
                   builder: (context, _) {
-                    if (request.moviesNowPlaying != null) {
+                    if (request.moviesNowPlaying != null && request.topMovies != null) {
                       return Column(
                         children: [
                           const Padding(
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       );
                     } else {
-                      return const Text("Erro ao carregar filmes");
+                      return const Text("Erro ao carregar filmes", style: TextStyle(color: Colors.white),);
                     }
                   })
             ],
