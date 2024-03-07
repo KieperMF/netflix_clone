@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_flix/request/http_request.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +44,8 @@ class _HomePageState extends State<HomePage> {
               ListenableBuilder(
                   listenable: request,
                   builder: (context, _) {
-                    if (request.moviesNowPlaying != null && request.topMovies != null) {
+                    if (request.moviesNowPlaying != null &&
+                        request.topMovies != null) {
                       return Column(
                         children: [
                           const Padding(
@@ -65,9 +67,7 @@ class _HomePageState extends State<HomePage> {
                                 itemBuilder: (context, index) {
                                   return Padding(
                                       padding: const EdgeInsets.all(15),
-                                      child: SizedBox(
-                                        width: 150,
-                                        child: Column(
+                                      child:  Column(
                                           children: [
                                             SizedBox(
                                               height: 190,
@@ -77,21 +77,64 @@ class _HomePageState extends State<HomePage> {
                                                   child: Image.network(
                                                       '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
                                             ),
-                                            Text(
-                                              request.moviesNowPlaying![index].title,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
+                                            SizedBox(
+                                              width: 160,
+                                              child: Text(
+                                                request.moviesNowPlaying![index]
+                                                    .title,
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18),
+                                              ),
                                             )
                                           ],
                                         ),
-                                      ));
+                                      );
                                 }),
                           ),
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Melhores Filmes',
+                                  style: TextStyle(color: Colors.white, fontSize: 22),
+                                ),
+                              )),
+                          SizedBox(
+                            height: 300,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: request.topMovies!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding:const EdgeInsets.all(15),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                      height: 190,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.network(
+                                            "${request.urlData.poster}${request.topMovies![index].poster}"),
+                                      )),
+                                      SizedBox(
+                                        width: 160,
+                                        child: Text(request.topMovies![index].title, style:const TextStyle(color: Colors.white, fontSize: 18),),
+                                      )
+                                    ],
+                                  )
+                                );
+                              },
+                            ),
+                          )
                         ],
                       );
                     } else {
-                      return const Text("Erro ao carregar filmes", style: TextStyle(color: Colors.white),);
+                      return const Text(
+                        "Erro ao carregar filmes",
+                        style: TextStyle(color: Colors.white),
+                      );
                     }
                   })
             ],
