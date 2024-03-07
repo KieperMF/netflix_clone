@@ -66,30 +66,30 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: request.moviesNowPlaying!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child:  Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 190,
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  child: Image.network(
-                                                      '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                            ),
-                                            SizedBox(
-                                              width: 160,
-                                              child: Text(
-                                                request.moviesNowPlaying![index]
-                                                    .title,
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 18),
-                                              ),
-                                            )
-                                          ],
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 190,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              child: Image.network(
+                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
                                         ),
-                                      );
+                                        SizedBox(
+                                          width: 160,
+                                          child: Text(
+                                            request
+                                                .moviesNowPlaying![index].title,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
                                 }),
                           ),
                           const Padding(
@@ -98,7 +98,8 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   'Melhores Filmes',
-                                  style: TextStyle(color: Colors.white, fontSize: 22),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 22),
                                 ),
                               )),
                           SizedBox(
@@ -108,23 +109,28 @@ class _HomePageState extends State<HomePage> {
                               itemCount: request.topMovies!.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding:const EdgeInsets.all(15),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                      height: 190,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network(
-                                            "${request.urlData.poster}${request.topMovies![index].poster}"),
-                                      )),
-                                      SizedBox(
-                                        width: 160,
-                                        child: Text(request.topMovies![index].title, style:const TextStyle(color: Colors.white, fontSize: 18),),
-                                      )
-                                    ],
-                                  )
-                                );
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                            height: 190,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              child: Image.network(
+                                                  "${request.urlData.poster}${request.topMovies![index].poster}"),
+                                            )),
+                                        SizedBox(
+                                          width: 160,
+                                          child: Text(
+                                            request.topMovies![index].title,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      ],
+                                    ));
                               },
                             ),
                           )
