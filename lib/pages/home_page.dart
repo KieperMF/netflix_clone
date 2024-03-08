@@ -60,17 +60,17 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: 300,
+                            height: 320,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
                                         SizedBox(
-                                          height: 190,
+                                          height: 180,
                                           child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(16),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                                                   '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
                                         ),
                                         SizedBox(
-                                          width: 160,
+                                          width: 120,
                                           child: Text(
                                             request
                                                 .moviesNowPlaying![index].title,
@@ -103,13 +103,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 300,
+                            height: 320,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                    padding: const EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
                                         SizedBox(
