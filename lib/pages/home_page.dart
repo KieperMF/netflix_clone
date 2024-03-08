@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: 320,
+                            height: double.maxFinite,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         SizedBox(
                                           height: 180,
+                                          width: 120,
                                           child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(16),
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 320,
+                            height: double.maxFinite,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
@@ -118,7 +119,8 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         SizedBox(
-                                            height: 190,
+                                            height: 180,
+                                            width: 120,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(16),
@@ -126,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                                   "${request.urlData.poster}${request.topMovies![index].poster}"),
                                             )),
                                         SizedBox(
-                                          width: 160,
+                                          width: 120,
                                           child: Text(
                                             request.topMovies![index].title,
                                             style: const TextStyle(

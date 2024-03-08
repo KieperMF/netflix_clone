@@ -8,11 +8,23 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final movieNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Pesquisa'),
+        title: const Text('Pesquisa'),
+      ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Center(
+          child: Column(
+            children: [
+              
+            ],
+          ),
+        ),
       ),
     );
   }

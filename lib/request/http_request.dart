@@ -41,6 +41,7 @@ class HttpRequest extends ChangeNotifier{
       final response = await http.get(uri);
       final decode = jsonDecode(response.body) as List;
       searchMovies = decode.map((json) => Movie.fromJson(json)).toList();
+      notifyListeners();
     }catch(e){
       print("erro $e");
     }
