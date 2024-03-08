@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 class HttpRequest extends ChangeNotifier{
   List<Movie>? moviesNowPlaying;
   List<Movie>? topMovies;
+  List<Movie>? searchMovies;
   UrlData urlData = UrlData();
 
   Future<void> nowPlayingRequest()async {
@@ -31,6 +32,17 @@ class HttpRequest extends ChangeNotifier{
       notifyListeners();
     }catch(e){
       print("Erro $e");
+    }
+  }
+
+  Future<void> searchMoviesRequest(String inputName)async{
+    try{
+      Uri uri = Uri.parse("${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");
+      final response = await http.get(uri);
+      final decode = jsonDecode(response.body) as List;
+      searchMovies = decode.map((json) => Movie.fromJson(json)).toList();
+    }catch(e){
+      print("erro $e");
     }
   }
 }

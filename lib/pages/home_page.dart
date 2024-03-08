@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_flix/pages/search_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,15 +28,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Align(
-            alignment: Alignment.center,
-            child: Text(
-              "Netflix",
-              style: TextStyle(
-                  color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-          )),
+        backgroundColor: Colors.black,
+        title: const Align(
+          alignment: Alignment.center,
+          child: Text(
+            "Netflix",
+            style: TextStyle(
+                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+        ),
+        actions: [IconButton(onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => const SearchPage())));
+        }, icon: const Icon(Icons.search))],
+      ),
       backgroundColor: Colors.grey[900],
       body: SingleChildScrollView(
         child: Center(
