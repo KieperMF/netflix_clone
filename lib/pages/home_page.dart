@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: double.maxFinite,
+                            height: 310,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         SizedBox(
                                           height: 180,
-                                          width: 120,
+                                          width: 130,
                                           child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(16),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: double.maxFinite,
+                            height: 300,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
