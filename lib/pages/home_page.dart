@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [IconButton(onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: ((context) => const SearchPage())));
-        }, icon: const Icon(Icons.search))],
+        }, icon: const Icon(Icons.search), color: Colors.white,)],
       ),
       backgroundColor: Colors.grey[900],
       body: SingleChildScrollView(
@@ -144,9 +144,8 @@ class _HomePageState extends State<HomePage> {
                         ],
                       );
                     } else {
-                      return const Text(
-                        "Erro ao carregar filmes",
-                        style: TextStyle(color: Colors.white),
+                      return const Padding(padding: EdgeInsets.only(top: 300),
+                        child: CircularProgressIndicator(color: Colors.red,)
                       );
                     }
                   })
