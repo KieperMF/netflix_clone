@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_flix/request/http_request.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,6 +11,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final movieNameController = TextEditingController();
+  final _request = HttpRequest();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,17 @@ class _SearchPageState extends State<SearchPage> {
                 width: 250,
                 child: TextField(
                   controller: movieNameController,
+                  textAlign: TextAlign.center,
                   decoration: const InputDecoration(
                       hintText: 'Informe um Filme',
                       hintStyle: TextStyle(color: Colors.white, fontSize: 18)),
+                  onSubmitted: (value) {
+                    if(value != ''){
+                      _request.searchMoviesRequest(value);
+                    }
+                  },
                 ),
-              )
+              ),
             ],
           ),
         ),

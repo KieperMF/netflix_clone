@@ -19,7 +19,7 @@ class HttpRequest extends ChangeNotifier{
       moviesNowPlaying = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     }catch(e){
-      print("Erro $e");
+      
     }
   }
 
