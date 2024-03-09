@@ -19,7 +19,6 @@ class HttpRequest extends ChangeNotifier{
       moviesNowPlaying = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     }catch(e){
-      
     }
   }
 
@@ -39,7 +38,8 @@ class HttpRequest extends ChangeNotifier{
     try{
       Uri uri = Uri.parse("${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
-      final decode = jsonDecode(response.body) as List;
+      final decode = jsonDecode(response.body)['results'] as List;
+      print(decode.elementAt(0));
       searchMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     }catch(e){

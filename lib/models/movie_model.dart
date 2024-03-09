@@ -3,8 +3,8 @@ class Movie {
   String overview;
   String release;
   double popularity;
-  String poster;
-  String background;
+  String? poster;
+  String? background;
 
   Movie({
     required this.title,
@@ -17,7 +17,7 @@ class Movie {
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-        title: json['title'],
+        title: json['title'] ,
         overview: json['overview'],
         release: json['release_date'],
         popularity: json['popularity'],

@@ -11,7 +11,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final movieNameController = TextEditingController();
-  final _request = HttpRequest();
+  HttpRequest _request = HttpRequest();
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,55 @@ class _SearchPageState extends State<SearchPage> {
                 child: TextField(
                   controller: movieNameController,
                   textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                       hintText: 'Informe um Filme',
                       hintStyle: TextStyle(color: Colors.white, fontSize: 18)),
                   onSubmitted: (value) {
-                    if(value != ''){
-                      _request.searchMoviesRequest(value);
-                    }
+                    _request.searchMoviesRequest(movieNameController.text);
                   },
                 ),
               ),
+              IconButton(
+                  onPressed: () {
+                    _request.searchMoviesRequest(movieNameController.text);
+                  },
+                  icon: const Icon(Icons.search)),
+              ListenableBuilder(
+                  listenable: _request,
+                  builder: (context, _) {
+                    if (_request.searchMovies != null) {
+                      return Column(
+                        children: [
+                           ListView.builder(
+                                shrinkWrap: true,
+                                physics:const BouncingScrollPhysics(),
+                                itemCount: _request.searchMovies!.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 200,
+                                        child: ClipRRect(
+                                          child: Image.network(
+                                              "${_request.urlData.poster}${_request.searchMovies![index].poster}"),
+                                        ),
+                                      ),
+                                      Text(
+                                        _request.searchMovies![index].title,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                          
+                        ],
+                      );
+                    } else {
+                      return const Text('erro');
+                    }
+                  }),
             ],
           ),
         ),
