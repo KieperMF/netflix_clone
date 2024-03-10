@@ -30,37 +30,44 @@ class _SearchPageState extends State<SearchPage> {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
-                width: 250,
-                child: TextField(
-                  controller: movieNameController,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                      hintText: 'Informe um Filme',
-                      hintStyle: TextStyle(color: Colors.white, fontSize: 18)),
-                  onSubmitted: (value) {
-                    _request.searchMoviesRequest(movieNameController.text);
-                  },
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 250,
+                    child: TextField(
+                      controller: movieNameController,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                          hintText: 'Informe um Filme',
+                          hintStyle:
+                              TextStyle(color: Colors.white, fontSize: 18)),
+                      onSubmitted: (value) {
+                        _request.searchMoviesRequest(movieNameController.text);
+                      },
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        _request.searchMoviesRequest(movieNameController.text);
+                      },
+                      icon: const Icon(Icons.search)),
+                ],
               ),
-              IconButton(
-                  onPressed: () {
-                    _request.searchMoviesRequest(movieNameController.text);
-                  },
-                  icon: const Icon(Icons.search)),
               ListenableBuilder(
                   listenable: _request,
                   builder: (context, _) {
                     if (_request.searchMovies != null) {
                       return Column(
                         children: [
-                           ListView.builder(
-                                shrinkWrap: true,
-                                physics:const BouncingScrollPhysics(),
-                                itemCount: _request.searchMovies!.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(padding: EdgeInsets.all(10),
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: _request.searchMovies!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10),
                                   child: Column(
                                     children: [
                                       SizedBox(
@@ -76,9 +83,9 @@ class _SearchPageState extends State<SearchPage> {
                                             color: Colors.white, fontSize: 18),
                                       ),
                                     ],
-                                  ),);
-                                }),
-                          
+                                  ),
+                                );
+                              }),
                         ],
                       );
                     } else {

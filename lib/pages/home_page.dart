@@ -20,8 +20,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _load() async {
+    await request.trendingMoviesRequest();
     await request.nowPlayingRequest();
     await request.topMoviesRequest();
+    
   }
 
   @override
@@ -37,9 +39,18 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        actions: [IconButton(onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => const SearchPage())));
-        }, icon: const Icon(Icons.search), color: Colors.white,)],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const SearchPage())));
+            },
+            icon: const Icon(Icons.search),
+            color: Colors.white,
+          )
+        ],
       ),
       backgroundColor: Colors.grey[900],
       body: SingleChildScrollView(
@@ -140,13 +151,68 @@ class _HomePageState extends State<HomePage> {
                                     ));
                               },
                             ),
+                          ),
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Em Alta',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 22),
+                                ),
+                              )),
+                          SizedBox(
+                            height: 320,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: request.trendingMovies!.length,
+                              itemBuilder: (context, index){
+                                return Padding(padding:const EdgeInsets.all(10), 
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 180,
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.network("${request.urlData.poster}${request.trendingMovies![index].poster}"),
+                                      ),
+                                    ),
+                                    if(request.trendingMovies![index].title != null)...[
+                                       SizedBox(
+                                          width: 120,
+                                          child: Text(
+                                            '${request.trendingMovies![index].title}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                    ]else if(request.trendingMovies![index].name != null)...[
+                                      SizedBox(
+                                          width: 120,
+                                          child: Text(
+                                            '${request.trendingMovies![index].name}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                    ],
+                                   
+                                  ],
+                                ),);
+                              }),
                           )
                         ],
                       );
                     } else {
-                      return const Padding(padding: EdgeInsets.only(top: 300),
-                        child: CircularProgressIndicator(color: Colors.red,)
-                      );
+                      return const Padding(
+                          padding: EdgeInsets.only(top: 300),
+                          child: CircularProgressIndicator(
+                            color: Colors.red,
+                          ));
                     }
                   })
             ],
