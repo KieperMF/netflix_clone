@@ -1,11 +1,11 @@
 class TrendingMovies{
-  String title;
-  String name;
+  String? title;
+  String? name;
   String overview;
-  String releaseDate;
+  String? releaseDate;
   double popularity;
-  String poster;
-  String background;
+  String? poster;
+  String? background;
   String mediaType;
 
   TrendingMovies({

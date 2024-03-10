@@ -179,21 +179,21 @@ class _HomePageState extends State<HomePage> {
                                         child: Image.network("${request.urlData.poster}${request.trendingMovies![index].poster}"),
                                       ),
                                     ),
-                                    if(request.trendingMovies![index].mediaType == 'movie')...[
+                                    if(request.trendingMovies![index].title != null)...[
                                        SizedBox(
                                           width: 120,
                                           child: Text(
-                                            request.trendingMovies![index].title,
+                                            '${request.trendingMovies![index].title}',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
                                           ),
                                         )
-                                    ]else if(request.trendingMovies![index].mediaType == 'tv')...[
+                                    ]else if(request.trendingMovies![index].name != null)...[
                                       SizedBox(
                                           width: 120,
                                           child: Text(
-                                            request.trendingMovies![index].name,
+                                            '${request.trendingMovies![index].name}',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),

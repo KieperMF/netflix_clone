@@ -13,16 +13,16 @@ class HttpRequest extends ChangeNotifier {
   List<TrendingMovies>? trendingMovies;
   UrlData urlData = UrlData();
 
-  Future<void> trendingMoviesRequest() async{
-    try{
-      Uri uri = Uri.parse("${urlData.trending}${urlData.apiKey}${urlData.ptBr}");
+  Future<void> trendingMoviesRequest() async {
+    try {
+      Uri uri =
+          Uri.parse("${urlData.trending}${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
-      trendingMovies = decode.map((json) => TrendingMovies.fromJson(json)).toList();
+      trendingMovies =
+          decode.map((json) => TrendingMovies.fromJson(json)).toList();
       notifyListeners();
-    }catch(e){
-
-    }
+    } catch (e) {}
   }
 
   Future<void> nowPlayingRequest() async {
