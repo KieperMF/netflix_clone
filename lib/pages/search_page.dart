@@ -60,7 +60,8 @@ class _SearchPageState extends State<SearchPage> {
                                 physics:const BouncingScrollPhysics(),
                                 itemCount: _request.searchMovies!.length,
                                 itemBuilder: (context, index) {
-                                  return Column(
+                                  return Padding(padding: EdgeInsets.all(10),
+                                  child: Column(
                                     children: [
                                       SizedBox(
                                         height: 200,
@@ -72,10 +73,10 @@ class _SearchPageState extends State<SearchPage> {
                                       Text(
                                         _request.searchMovies![index].title,
                                         style: const TextStyle(
-                                            color: Colors.white),
+                                            color: Colors.white, fontSize: 18),
                                       ),
                                     ],
-                                  );
+                                  ),);
                                 }),
                           
                         ],

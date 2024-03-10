@@ -39,7 +39,6 @@ class HttpRequest extends ChangeNotifier{
       Uri uri = Uri.parse("${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
-      print(decode.elementAt(0));
       searchMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     }catch(e){
