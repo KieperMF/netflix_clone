@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
     await request.trendingMoviesRequest();
     await request.nowPlayingRequest();
     await request.topMoviesRequest();
-    
   }
 
   @override
@@ -146,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.white,
                                                 fontSize: 18),
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ));
                               },
@@ -165,45 +164,52 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: 320,
                             child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: request.trendingMovies!.length,
-                              itemBuilder: (context, index){
-                                return Padding(padding:const EdgeInsets.all(10), 
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 180,
-                                      width: 120,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network("${request.urlData.poster}${request.trendingMovies![index].poster}"),
-                                      ),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: request.trendingMovies!.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 180,
+                                          width: 120,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            child: Image.network(
+                                                "${request.urlData.poster}${request.trendingMovies![index].poster}"),
+                                          ),
+                                        ),
+                                        if (request
+                                                .trendingMovies![index].title !=
+                                            null) ...[
+                                          SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              '${request.trendingMovies![index].title}',
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        ] else if (request
+                                                .trendingMovies![index].name !=
+                                            null) ...[
+                                          SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              '${request.trendingMovies![index].name}',
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        ],
+                                      ],
                                     ),
-                                    if(request.trendingMovies![index].title != null)...[
-                                       SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            '${request.trendingMovies![index].title}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ),
-                                        )
-                                    ]else if(request.trendingMovies![index].name != null)...[
-                                      SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            '${request.trendingMovies![index].name}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ),
-                                        )
-                                    ],
-                                   
-                                  ],
-                                ),);
-                              }),
+                                  );
+                                }),
                           )
                         ],
                       );
