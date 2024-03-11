@@ -12,7 +12,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final movieNameController = TextEditingController();
-  HttpRequest _request = HttpRequest();
+  final _request = HttpRequest();
 
   @override
   void initState() {
@@ -20,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
     _load();
   }
 
-  void _load(){
+  void _load() {
     _request.trendingMoviesRequest();
   }
 
@@ -28,10 +28,23 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Pesquisa',
-          style: TextStyle(color: Colors.white),
-        ),
+        actions: [
+          SizedBox(
+            width: 280,
+            child: TextField(
+              controller: movieNameController,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.search),
+                  hintText: 'Pesquise séries e filmes',
+                  hintStyle: TextStyle(color: Colors.white, fontSize: 16)),
+              onSubmitted: (value) {
+                _request.searchMoviesRequest(value);
+              },
+            ),
+          ),
+        ],
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -41,31 +54,6 @@ class _SearchPageState extends State<SearchPage> {
         child: Center(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: TextField(
-                      controller: movieNameController,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                          hintText: 'Informe um Filme',
-                          hintStyle:
-                              TextStyle(color: Colors.white, fontSize: 18)),
-                      onSubmitted: (value) {
-                        _request.searchMoviesRequest(movieNameController.text);
-                      },
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        _request.searchMoviesRequest(movieNameController.text);
-                      },
-                      icon: const Icon(Icons.search)),
-                ],
-              ),
               ListenableBuilder(
                   listenable: _request,
                   builder: (context, _) {
@@ -73,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
                       return Column(
                         children: [
                           ListView.builder(
-                            shrinkWrap: true,
+                              shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
                               itemCount: _request.searchMovies!.length,
                               itemBuilder: (context, index) {
@@ -91,12 +79,12 @@ class _SearchPageState extends State<SearchPage> {
                                       SizedBox(
                                         width: 130,
                                         child: Text(
-                                        _request.searchMovies![index].title,
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
+                                          _request.searchMovies![index].title,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
                                       )
-                                      
                                     ],
                                   ),
                                 );
@@ -120,55 +108,58 @@ class _SearchPageState extends State<SearchPage> {
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
-                            itemCount: _request.trendingMovies!.length,
-                            itemBuilder: (context, index){
-                              return Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                          height: 250,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(16),
-                                            child: Image.network(
-                                                "${_request.urlData.poster}${_request.trendingMovies![index].poster}"),
-                                          ),
+                              itemCount: _request.trendingMovies!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 250,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          child: Image.network(
+                                              "${_request.urlData.poster}${_request.trendingMovies![index].poster}"),
                                         ),
-                                        if (_request
-                                                  .trendingMovies![index].title !=
-                                              null) ...[
-                                            SizedBox(
-                                              width: 130,
-                                              child: Text(
-                                                '${_request.trendingMovies![index].title}',
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                              ),
-                                            )
-                                          ] else if (_request
-                                                  .trendingMovies![index].name !=
-                                              null) ...[
-                                            SizedBox(
-                                              width: 130,
-                                              child: Text(
-                                                '${_request.trendingMovies![index].name}',
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                              ),
-                                            )
-                                          ],
-                                    
-                                  ],
-                                ),
-                              );
-                            }),
-                          
+                                      ),
+                                      if (_request
+                                              .trendingMovies![index].title !=
+                                          null) ...[
+                                        SizedBox(
+                                          width: 130,
+                                          child: Text(
+                                            '${_request.trendingMovies![index].title}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        )
+                                      ] else if (_request
+                                              .trendingMovies![index].name !=
+                                          null) ...[
+                                        SizedBox(
+                                          width: 130,
+                                          child: Text(
+                                            '${_request.trendingMovies![index].name}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        )
+                                      ],
+                                    ],
+                                  ),
+                                );
+                              }),
                         ],
                       );
-                    }else {
-                      return Text("data");
+                    } else {
+                      return const Padding(
+                          padding: EdgeInsets.only(top: 300),
+                          child: CircularProgressIndicator(
+                            color: Colors.red,
+                          ));
                     }
                   }),
             ],
