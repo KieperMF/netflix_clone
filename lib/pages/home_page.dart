@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/pages/search_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
 
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: 310,
+                            height: 320,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
@@ -84,15 +85,17 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        SizedBox(
+                                        TextButton(onPressed: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePage()));
+                                        }, child: SizedBox(
                                           height: 180,
-                                          width: 130,
+                                          width: 120,
                                           child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                               child: Image.network(
                                                   '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                        ),
+                                        ),),
                                         SizedBox(
                                           width: 120,
                                           child: Text(
@@ -109,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                                 }),
                           ),
                           const Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
@@ -119,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 300,
+                            height: 320,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
@@ -128,7 +131,9 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        SizedBox(
+                                        TextButton(onPressed: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePage()));
+                                        }, child: SizedBox(
                                             height: 180,
                                             width: 120,
                                             child: ClipRRect(
@@ -136,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                                   BorderRadius.circular(16),
                                               child: Image.network(
                                                   "${request.urlData.poster}${request.topMovies![index].poster}"),
-                                            )),
+                                            )),),
                                         SizedBox(
                                           width: 120,
                                           child: Text(
@@ -152,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
@@ -171,16 +176,24 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        SizedBox(
-                                          height: 180,
-                                          width: 120,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            child: Image.network(
-                                                "${request.urlData.poster}${request.trendingMovies![index].poster}"),
-                                          ),
-                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                         const MoviePage()));
+                                            },
+                                            child: SizedBox(
+                                              width: 120,
+                                              height: 180,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: Image.network(
+                                                    "${request.urlData.poster}${request.trendingMovies![index].poster}"),
+                                              ),
+                                            )),
                                         if (request
                                                 .trendingMovies![index].title !=
                                             null) ...[
