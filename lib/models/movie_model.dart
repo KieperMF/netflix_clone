@@ -1,12 +1,12 @@
 class Movie {
-  String title;
+  String? title;
   String overview;
-  String releaseDate;
-  double popularity;
+  String? releaseDate;
+  double? popularity;
   String? poster;
   String? background;
   String? mediaType;
-    String? name;
+  String? name;
 
   Movie({
     required this.name,
