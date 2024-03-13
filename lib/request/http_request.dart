@@ -11,6 +11,7 @@ class HttpRequest extends ChangeNotifier {
   List<Movie>? topMovies;
   List<Movie>? searchMovies;
   List<TrendingMovies>? trendingMovies;
+  Movie? movieSelected;
   UrlData urlData = UrlData();
 
   Future<void> trendingMoviesRequest() async {

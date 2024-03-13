@@ -32,11 +32,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Align(
-          alignment: Alignment.center,
+          alignment: Alignment.topLeft,
           child: Text(
-            "Netflix",
+            "N",
             style: TextStyle(
-                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+                color: Colors.red, fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             },
             icon: const Icon(Icons.search),
             color: Colors.white,
-          )
+          ),
         ],
       ),
       backgroundColor: Colors.grey[900],
@@ -86,7 +86,8 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         TextButton(onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePage()));
+                                          request.movieSelected = request.moviesNowPlaying![index];
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
                                         }, child: SizedBox(
                                           height: 180,
                                           width: 120,
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         TextButton(onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePage()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
                                         }, child: SizedBox(
                                             height: 180,
                                             width: 120,
