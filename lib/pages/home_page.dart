@@ -85,18 +85,26 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        TextButton(onPressed: (){
-                                          request.movieSelected = request.moviesNowPlaying![index];
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
-                                        }, child: SizedBox(
-                                          height: 180,
-                                          width: 120,
-                                          child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              child: Image.network(
-                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                        ),),
+                                        TextButton(
+                                          onPressed: () {
+                                            request.movieSelected = request
+                                                .moviesNowPlaying![index];
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const MoviePage()));
+                                          },
+                                          child: SizedBox(
+                                            height: 180,
+                                            width: 120,
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: Image.network(
+                                                    '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: 120,
                                           child: Text(
@@ -132,17 +140,26 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        TextButton(onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
-                                        }, child: SizedBox(
-                                            height: 180,
-                                            width: 120,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              child: Image.network(
-                                                  "${request.urlData.poster}${request.topMovies![index].poster}"),
-                                            )),),
+                                        TextButton(
+                                          onPressed: () {
+                                            request.movieSelected =
+                                                request.topMovies![index];
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const MoviePage()));
+                                          },
+                                          child: SizedBox(
+                                              height: 180,
+                                              width: 120,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: Image.network(
+                                                    "${request.urlData.poster}${request.topMovies![index].poster}"),
+                                              )),
+                                        ),
                                         SizedBox(
                                           width: 120,
                                           child: Text(
@@ -179,11 +196,14 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         TextButton(
                                             onPressed: () {
+                                              request.movieSelected =
+                                                  request
+                                                      .trendingMovies![index];
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                         const MoviePage()));
+                                                          const MoviePage()));
                                             },
                                             child: SizedBox(
                                               width: 120,
@@ -196,24 +216,22 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             )),
                                         if (request
-                                                .trendingMovies![index].title !=
-                                            null) ...[
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              '${request.trendingMovies![index].title}',
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
-                                          )
-                                        ] else if (request
                                                 .trendingMovies![index].name !=
                                             null) ...[
                                           SizedBox(
                                             width: 120,
                                             child: Text(
                                               '${request.trendingMovies![index].name}',
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        ] else ...[
+                                          SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              request.trendingMovies![index].title,
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18),

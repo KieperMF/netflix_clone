@@ -124,24 +124,22 @@ class _SearchPageState extends State<SearchPage> {
                                         ),
                                       ),
                                       if (_request
-                                              .trendingMovies![index].title !=
-                                          null) ...[
-                                        SizedBox(
-                                          width: 130,
-                                          child: Text(
-                                            '${_request.trendingMovies![index].title}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                        )
-                                      ] else if (_request
                                               .trendingMovies![index].name !=
                                           null) ...[
                                         SizedBox(
                                           width: 130,
                                           child: Text(
                                             '${_request.trendingMovies![index].name}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        )
+                                      ] else ...[
+                                        SizedBox(
+                                          width: 130,
+                                          child: Text(
+                                            _request.trendingMovies![index].title,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20),

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_flix/models/movie_model.dart';
-import 'package:flutter_flix/models/trendig.dart';
 import 'package:flutter_flix/models/url_data.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,7 +9,7 @@ class HttpRequest extends ChangeNotifier {
   List<Movie>? moviesNowPlaying;
   List<Movie>? topMovies;
   List<Movie>? searchMovies;
-  List<TrendingMovies>? trendingMovies;
+  List<Movie>? trendingMovies;
   Movie? movieSelected;
   UrlData urlData = UrlData();
 
@@ -21,7 +20,7 @@ class HttpRequest extends ChangeNotifier {
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
       trendingMovies =
-          decode.map((json) => TrendingMovies.fromJson(json)).toList();
+          decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {}
   }

@@ -6,8 +6,10 @@ class Movie {
   String? poster;
   String? background;
   String? mediaType;
+    String? name;
 
   Movie({
+    required this.name,
     required this.title,
     required this.overview,
     required this.releaseDate,
@@ -25,6 +27,7 @@ class Movie {
         popularity: json['popularity'],
         poster: json['poster_path'],
         mediaType: json['media_type'],
+        name: json['name'],
         background: json['backdrop_path']);
   }
 }
