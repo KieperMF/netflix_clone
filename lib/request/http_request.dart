@@ -13,16 +13,21 @@ class HttpRequest extends ChangeNotifier {
   Movie? movieSelected;
   UrlData urlData = UrlData();
 
-  Future<void> trendingMoviesRequest() async {
+  Future<void> trendingMoviesRequest(BuildContext context) async {
     try {
       Uri uri =
           Uri.parse("${urlData.trending}${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
-      trendingMovies =
-          decode.map((json) => Movie.fromJson(json)).toList();
+      trendingMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ocorreu um erro ao carregar os filmes.'),
+        ),
+      );
+    }
   }
 
   Future<void> nowPlayingRequest() async {
@@ -44,12 +49,10 @@ class HttpRequest extends ChangeNotifier {
       final decode = jsonDecode(response.body)['results'] as List;
       topMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
-    } catch (e) {
-      print("Erro $e");
-    }
+    } catch (e) {}
   }
 
-  Future<void> searchMoviesRequest(String inputName) async {
+  Future<void> searchMoviesRequest(String inputName, BuildContext context) async {
     try {
       Uri uri = Uri.parse(
           "${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");
@@ -58,7 +61,11 @@ class HttpRequest extends ChangeNotifier {
       searchMovies = decode.map((json) => Movie.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {
-      print("erro $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ocorreu um erro ao carregar os filmes.'),
+        ),
+      );
     }
   }
 }

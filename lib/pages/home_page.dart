@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _load() async {
-    await request.trendingMoviesRequest();
+    await request.trendingMoviesRequest(context);
     await request.nowPlayingRequest();
     await request.topMoviesRequest();
   }
@@ -108,8 +108,7 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           width: 120,
                                           child: Text(
-                                            '${request
-                                                .moviesNowPlaying![index].title}',
+                                            '${request.moviesNowPlaying![index].title}',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
@@ -196,9 +195,8 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              request.movieSelected =
-                                                  request
-                                                      .trendingMovies![index];
+                                              request.movieSelected = request
+                                                  .trendingMovies![index];
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

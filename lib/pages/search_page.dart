@@ -21,7 +21,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _load() {
-    _request.trendingMoviesRequest();
+    _request.trendingMoviesRequest(context);
   }
 
   @override
@@ -40,7 +40,7 @@ class _SearchPageState extends State<SearchPage> {
                   hintText: 'Pesquise séries e filmes',
                   hintStyle: TextStyle(color: Colors.white, fontSize: 16)),
               onSubmitted: (value) {
-                _request.searchMoviesRequest(value);
+                _request.searchMoviesRequest(value, context);
               },
             ),
           ),
