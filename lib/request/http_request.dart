@@ -5,13 +5,21 @@ import 'package:flutter_flix/models/movie_model.dart';
 import 'package:flutter_flix/models/url_data.dart';
 import 'package:http/http.dart' as http;
 
+Movie? movieSelected;
+
 class HttpRequest extends ChangeNotifier {
   List<Movie>? moviesNowPlaying;
   List<Movie>? topMovies;
   List<Movie>? searchMovies;
   List<Movie>? trendingMovies;
-  Movie? movieSelected;
+  //Movie? movieSelected;
   UrlData urlData = UrlData();
+
+  movieNowPlaySelection(int index) {
+    movieSelected = moviesNowPlaying![index];
+    print('${movieSelected!.title}');
+    notifyListeners();
+  }
 
   Future<void> trendingMoviesRequest(BuildContext context) async {
     try {
@@ -52,7 +60,8 @@ class HttpRequest extends ChangeNotifier {
     } catch (e) {}
   }
 
-  Future<void> searchMoviesRequest(String inputName, BuildContext context) async {
+  Future<void> searchMoviesRequest(
+      String inputName, BuildContext context) async {
     try {
       Uri uri = Uri.parse(
           "${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");

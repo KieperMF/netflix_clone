@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/pages/search_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         TextButton(
                                           onPressed: () {
-                                            request.movieSelected = request
+                                            movieSelected = request
                                                 .moviesNowPlaying![index];
                                             Navigator.push(
                                                 context,
@@ -141,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         TextButton(
                                           onPressed: () {
-                                            request.movieSelected =
+                                            movieSelected =
                                                 request.topMovies![index];
                                             Navigator.push(
                                                 context,
@@ -195,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              request.movieSelected = request
+                                              movieSelected = request
                                                   .trendingMovies![index];
                                               Navigator.push(
                                                   context,
