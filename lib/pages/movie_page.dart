@@ -15,17 +15,21 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("algum filme"),
+        title: const Text("algum filme"),
       ),
+      backgroundColor: Colors.grey,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (movieSelected != null) ...[
-              Image(
+              SizedBox(
+                height: 200,
+                child: Image(
                   image: NetworkImage(
-                      "${request.urlData.poster}${movieSelected!.poster}"))
-            ] else ...[
-              Text('erro'),
+                      "${request.urlData.poster}${movieSelected!.poster}")),
+              )
             ]
           ],
         ),
