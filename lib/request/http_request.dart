@@ -15,19 +15,20 @@ class HttpRequest extends ChangeNotifier {
   //Movie? movieSelected;
   UrlData urlData = UrlData();
 
-  movieNowPlaySelection(int index) {
-    movieSelected = moviesNowPlaying![index];
-    print('${movieSelected!.title}');
-    notifyListeners();
-  }
-
   Future<void> trendingMoviesRequest(BuildContext context) async {
+    int i = 0;
     try {
       Uri uri =
           Uri.parse("${urlData.trending}${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
       trendingMovies = decode.map((json) => Movie.fromJson(json)).toList();
+      while(trendingMovies!.length > i){
+        if(trendingMovies![i].title == null){
+          trendingMovies![i].title = trendingMovies![i].name;
+        }
+        i++;
+      }
       notifyListeners();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

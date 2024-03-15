@@ -121,19 +121,6 @@ class _SearchPageState extends State<SearchPage> {
                                               "${_request.urlData.poster}${_request.trendingMovies![index].poster}"),
                                         ),
                                       ),
-                                      if (_request
-                                              .trendingMovies![index].name !=
-                                          null) ...[
-                                        SizedBox(
-                                          width: 130,
-                                          child: Text(
-                                            '${_request.trendingMovies![index].name}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                        )
-                                      ] else if(_request.trendingMovies![index].title != null) ...[
                                         SizedBox(
                                           width: 130,
                                           child: Text(
@@ -143,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 fontSize: 20),
                                           ),
                                         )
-                                      ],
+                                      
                                     ],
                                   ),
                                 );

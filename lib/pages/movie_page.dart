@@ -14,26 +14,27 @@ class _MoviePageState extends State<MoviePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("algum filme"),
-      ),
-      backgroundColor: Colors.grey,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (movieSelected != null) ...[
-              SizedBox(
-                height: 200,
-                child: Image(
-                  image: NetworkImage(
-                      "${request.urlData.poster}${movieSelected!.poster}")),
-              )
-            ]
-          ],
+        appBar: AppBar(
+          title: const Text("algum filme"),
         ),
-      ),
-    );
+        backgroundColor: Colors.grey,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (movieSelected != null) ...[
+                  SizedBox(
+                    height: 200,
+                    child: Image(
+                        image: NetworkImage(
+                            "${request.urlData.poster}${movieSelected!.poster}")),
+                  )
+                ]
+              ],
+            ),
+          ),
+        ));
   }
 }

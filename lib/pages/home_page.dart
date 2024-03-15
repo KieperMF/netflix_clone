@@ -212,19 +212,6 @@ class _HomePageState extends State<HomePage> {
                                                     "${request.urlData.poster}${request.trendingMovies![index].poster}"),
                                               ),
                                             )),
-                                        if (request
-                                                .trendingMovies![index].name !=
-                                            null) ...[
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              '${request.trendingMovies![index].name}',
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
-                                          )
-                                        ] else ...[
                                           SizedBox(
                                             width: 120,
                                             child: Text(
@@ -234,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                                                   fontSize: 18),
                                             ),
                                           )
-                                        ],
+                                        
                                       ],
                                     ),
                                   );
