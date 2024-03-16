@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           width: 120,
                                           child: Text(
-                                            '${request.moviesNowPlaying![index].title}',
+                                            request.moviesNowPlaying![index].title,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           width: 120,
                                           child: Text(
-                                            '${request.topMovies![index].title}',
+                                            request.topMovies![index].title,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                                           SizedBox(
                                             width: 120,
                                             child: Text(
-                                              '${request.trendingMovies![index].title}',
+                                              request.trendingMovies![index].title,
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18),

@@ -16,19 +16,13 @@ class HttpRequest extends ChangeNotifier {
   UrlData urlData = UrlData();
 
   Future<void> trendingMoviesRequest(BuildContext context) async {
-    int i = 0;
     try {
       Uri uri =
           Uri.parse("${urlData.trending}${urlData.apiKey}${urlData.ptBr}");
       final response = await http.get(uri);
       final decode = jsonDecode(response.body)['results'] as List;
       trendingMovies = decode.map((json) => Movie.fromJson(json)).toList();
-      while(trendingMovies!.length > i){
-        if(trendingMovies![i].title == null){
-          trendingMovies![i].title = trendingMovies![i].name;
-        }
-        i++;
-      }
+     
       notifyListeners();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -61,8 +55,7 @@ class HttpRequest extends ChangeNotifier {
     } catch (e) {}
   }
 
-  Future<void> searchMoviesRequest(
-      String inputName, BuildContext context) async {
+  Future<void> searchMoviesRequest(String inputName, BuildContext context) async {
     try {
       Uri uri = Uri.parse(
           "${urlData.searchMovies}$inputName${urlData.apiKey}${urlData.ptBr}");
