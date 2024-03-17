@@ -63,6 +63,21 @@ class _HomePageState extends State<HomePage> {
                         request.topMovies != null) {
                       return Column(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: SizedBox(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.network(
+                                    "${request.urlData.poster}${request.topMovies![0].background}"),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            request.topMovies![0].title,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 22),
+                          ),
                           const Padding(
                             padding: EdgeInsets.all(10),
                             child: Align(
@@ -70,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 'Lançamentos',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                                    color: Colors.white, fontSize: 26),
                               ),
                             ),
                           ),
@@ -107,7 +122,8 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(
                                           width: 120,
                                           child: Text(
-                                            request.moviesNowPlaying![index].title,
+                                            request
+                                                .moviesNowPlaying![index].title,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
@@ -125,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'Melhores Filmes',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 26),
                                 ),
                               )),
                           SizedBox(
@@ -179,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'Em Alta',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 26),
                                 ),
                               )),
                           SizedBox(
@@ -212,16 +228,16 @@ class _HomePageState extends State<HomePage> {
                                                     "${request.urlData.poster}${request.trendingMovies![index].poster}"),
                                               ),
                                             )),
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              request.trendingMovies![index].title,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
-                                          )
-                                        
+                                        SizedBox(
+                                          width: 120,
+                                          child: Text(
+                                            request
+                                                .trendingMovies![index].title,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   );
