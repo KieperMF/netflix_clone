@@ -65,16 +65,23 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(10),
-                            child: SizedBox(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
+                              ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: Image.network(
-                                    "${request.urlData.poster}${request.topMovies![0].background}"),
+                                    "${request.urlData.poster}${request.topMovies![1].background}"),
                               ),
                             ),
                           ),
                           Text(
-                            request.topMovies![0].title,
+                            request.topMovies![1].title,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 22),
                           ),
