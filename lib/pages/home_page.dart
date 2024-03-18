@@ -63,28 +63,45 @@ class _HomePageState extends State<HomePage> {
                         request.topMovies != null) {
                       return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 2,
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: Image.network(
-                                    "${request.urlData.poster}${request.topMovies![1].background}"),
-                              ),
+                          if (request.topMovies![1].background != null) ...[
+                            Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: TextButton(
+                                  onPressed: () {
+                                    movieSelected = request.topMovies![1];
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MoviePage()));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(
+                                        color: Colors.white,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: Image.network(
+                                          "${request.urlData.poster}${request.topMovies![1].background}"),
+                                    ),
+                                  ),
+                                )),
+                            Text(
+                              request.topMovies![1].title,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 22),
                             ),
-                          ),
-                          Text(
-                            request.topMovies![1].title,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 22),
-                          ),
+                          ] else ...[
+                            const Padding(
+                                padding: EdgeInsets.only(top: 300),
+                                child: CircularProgressIndicator(
+                                  color: Colors.red,
+                                ))
+                          ],
                           const Padding(
                             padding: EdgeInsets.all(10),
                             child: Align(
