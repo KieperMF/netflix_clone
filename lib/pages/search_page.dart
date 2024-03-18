@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                                       SizedBox(
                                         width: 130,
                                         child: Text(
-                                          '${_request.searchMovies![index].title}',
+                                          _request.searchMovies![index].title,
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 20),
@@ -124,7 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                                         SizedBox(
                                           width: 130,
                                           child: Text(
-                                            '${_request.trendingMovies![index].title}',
+                                            _request.trendingMovies![index].title,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20),
