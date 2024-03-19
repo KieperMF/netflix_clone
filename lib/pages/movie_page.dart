@@ -30,7 +30,8 @@ class _MoviePageState extends State<MoviePage> {
                     child: Image(
                         image: NetworkImage(
                             "${request.urlData.poster}${movieSelected!.poster}")),
-                  )
+                  ),
+                  Text(movieSelected!.title, style: const TextStyle(color: Colors.white, fontSize: 18),)
                 ]
               ],
             ),
