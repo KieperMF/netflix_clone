@@ -15,23 +15,27 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("algum filme"),
+          backgroundColor: Colors.black,
+          iconTheme:const IconThemeData(color: Colors.white),
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[800],
         body: SingleChildScrollView(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (movieSelected != null) ...[
-                  SizedBox(
-                    height: 200,
-                    child: Image(
+                  Padding(padding:const EdgeInsets.all(10),
+                  child: SizedBox(
+                    height: 250,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image(
                         image: NetworkImage(
                             "${request.urlData.poster}${movieSelected!.poster}")),
-                  ),
-                  Text(movieSelected!.title, style: const TextStyle(color: Colors.white, fontSize: 18),)
+                    )
+                  ),),
+                  Text(movieSelected!.title, style: const TextStyle(color: Colors.white, fontSize: 20),),
+                  Text(" Data de Lançamento: ${movieSelected!.releaseDate}", style: const TextStyle(color: Colors.white, fontSize: 20))
                 ]
               ],
             ),
