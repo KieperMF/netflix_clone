@@ -16,7 +16,7 @@ class _MoviePageState extends State<MoviePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          iconTheme:const IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         backgroundColor: Colors.grey[800],
         body: SingleChildScrollView(
@@ -24,18 +24,39 @@ class _MoviePageState extends State<MoviePage> {
             child: Column(
               children: [
                 if (movieSelected != null) ...[
-                  Padding(padding:const EdgeInsets.all(10),
-                  child: SizedBox(
-                    height: 250,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image(
-                        image: NetworkImage(
-                            "${request.urlData.poster}${movieSelected!.poster}")),
-                    )
-                  ),),
-                  Text(movieSelected!.title, style: const TextStyle(color: Colors.white, fontSize: 20),),
-                  Text(" Data de Lançamento: ${movieSelected!.releaseDate}", style: const TextStyle(color: Colors.white, fontSize: 20))
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                        height: 250,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image(
+                              image: NetworkImage(
+                                  "${request.urlData.poster}${movieSelected!.poster}")),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      movieSelected!.title,
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  Text("Data de Lançamento: ${movieSelected!.releaseDate}",
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 20)),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text("Popularidade: ${movieSelected!.popularity}",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20)),
+                  ),
+                  SizedBox(
+                    width: 350,
+                    child: Text("Sinpse: ${movieSelected!.overview}",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20)),
+                  )
                 ]
               ],
             ),
