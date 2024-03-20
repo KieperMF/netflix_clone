@@ -123,36 +123,46 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            movieSelected = request
-                                                .moviesNowPlaying![index];
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const MoviePage()));
-                                          },
-                                          child: SizedBox(
-                                            height: 180,
+                                        if (request.moviesNowPlaying !=
+                                            null) ...[
+                                          TextButton(
+                                            onPressed: () {
+                                              movieSelected = request
+                                                  .moviesNowPlaying![index];
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const MoviePage()));
+                                            },
+                                            child: SizedBox(
+                                              height: 180,
+                                              width: 120,
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: Image.network(
+                                                      '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                            ),
+                                          ),
+                                          SizedBox(
                                             width: 120,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.network(
-                                                    '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            request
-                                                .moviesNowPlaying![index].title,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ),
-                                        )
+                                            child: Text(
+                                              request.moviesNowPlaying![index]
+                                                  .title,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        ] else ...[
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 300),
+                                              child: CircularProgressIndicator(
+                                                color: Colors.red,
+                                              ))
+                                        ]
                                       ],
                                     ),
                                   );
@@ -178,35 +188,44 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            movieSelected =
-                                                request.topMovies![index];
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const MoviePage()));
-                                          },
-                                          child: SizedBox(
-                                              height: 180,
-                                              width: 120,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.network(
-                                                    "${request.urlData.poster}${request.topMovies![index].poster}"),
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            request.topMovies![index].title,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
+                                        if (request.topMovies != null) ...[
+                                          TextButton(
+                                            onPressed: () {
+                                              movieSelected =
+                                                  request.topMovies![index];
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const MoviePage()));
+                                            },
+                                            child: SizedBox(
+                                                height: 180,
+                                                width: 120,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: Image.network(
+                                                      "${request.urlData.poster}${request.topMovies![index].poster}"),
+                                                )),
                                           ),
-                                        ),
+                                          SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              request.topMovies![index].title,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                        ] else ...[
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 300),
+                                              child: CircularProgressIndicator(
+                                                color: Colors.red,
+                                              ))
+                                        ]
                                       ],
                                     ));
                               },
@@ -232,36 +251,45 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              movieSelected = request
-                                                  .trendingMovies![index];
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const MoviePage()));
-                                            },
-                                            child: SizedBox(
-                                              width: 120,
-                                              height: 180,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.network(
-                                                    "${request.urlData.poster}${request.trendingMovies![index].poster}"),
-                                              ),
-                                            )),
-                                        SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            request
-                                                .trendingMovies![index].title,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ),
-                                        )
+                                        if (request.trendingMovies != null) ...[
+                                          TextButton(
+                                              onPressed: () {
+                                                movieSelected = request
+                                                    .trendingMovies![index];
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const MoviePage()));
+                                              },
+                                              child: SizedBox(
+                                                width: 120,
+                                                height: 180,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: Image.network(
+                                                      "${request.urlData.poster}${request.trendingMovies![index].poster}"),
+                                                ),
+                                              )),
+                                          SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              request
+                                                  .trendingMovies![index].title,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        ] else ...[
+                                          const Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 300),
+                                              child: CircularProgressIndicator(
+                                                color: Colors.red,
+                                              ))
+                                        ]
                                       ],
                                     ),
                                   );

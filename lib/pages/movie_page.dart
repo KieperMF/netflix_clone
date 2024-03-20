@@ -18,7 +18,7 @@ class _MoviePageState extends State<MoviePage> {
           backgroundColor: Colors.black,
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey[900],
         body: SingleChildScrollView(
           child: Center(
             child: Column(
