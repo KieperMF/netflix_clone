@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
 
 class SearchPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _SearchPageState extends State<SearchPage> {
               textAlign: TextAlign.center,
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
-                icon: Icon(Icons.search),
+                  icon: Icon(Icons.search),
                   hintText: 'Pesquise séries e filmes',
                   hintStyle: TextStyle(color: Colors.white, fontSize: 16)),
               onSubmitted: (value) {
@@ -67,11 +68,19 @@ class _SearchPageState extends State<SearchPage> {
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
                                     children: [
-                                      SizedBox(
-                                        height: 250,
-                                        child: ClipRRect(
-                                          child: Image.network(
-                                              "${_request.urlData.poster}${_request.searchMovies![index].poster}"),
+                                      TextButton(
+                                        onPressed: () {
+                                          movieSelected = _request.searchMovies![index];
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
+                                        },
+                                        child: SizedBox(
+                                          height: 250,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            child: Image.network(
+                                                "${_request.urlData.poster}${_request.searchMovies![index].poster}"),
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -121,16 +130,15 @@ class _SearchPageState extends State<SearchPage> {
                                               "${_request.urlData.poster}${_request.trendingMovies![index].poster}"),
                                         ),
                                       ),
-                                        SizedBox(
-                                          width: 130,
-                                          child: Text(
-                                            _request.trendingMovies![index].title,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                        )
-                                      
+                                      SizedBox(
+                                        width: 130,
+                                        child: Text(
+                                          _request.trendingMovies![index].title,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 );

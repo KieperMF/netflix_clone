@@ -49,7 +49,6 @@ class _MoviePageState extends State<MoviePage> {
                                       "${request.urlData.poster}${movieSelected!.poster}")),
                             )),
                       ),),
-                      
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
