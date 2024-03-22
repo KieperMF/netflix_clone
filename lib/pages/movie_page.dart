@@ -22,12 +22,12 @@ class _MoviePageState extends State<MoviePage> {
         body: Stack(
           children: [
             Image(
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
                 image: NetworkImage(
                     "${request.urlData.poster}${movieSelected!.background}")),
-                     Container(
+            Container(
               color: Colors.black.withOpacity(0.7),
               width: double.infinity,
               height: double.infinity,
@@ -37,18 +37,20 @@ class _MoviePageState extends State<MoviePage> {
                 child: Column(
                   children: [
                     if (movieSelected != null) ...[
-                      Padding(padding:const EdgeInsets.only(top: 50),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SizedBox(
-                            height: 270,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image(
-                                  image: NetworkImage(
-                                      "${request.urlData.poster}${movieSelected!.poster}")),
-                            )),
-                      ),),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: SizedBox(
+                              height: 270,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image(
+                                    image: NetworkImage(
+                                        "${request.urlData.poster}${movieSelected!.poster}")),
+                              )),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(

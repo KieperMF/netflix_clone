@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                         request.topMovies != null) {
                       return Column(
                         children: [
-                          if (request.topMovies![1].background != null) ...[
                             Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: TextButton(
@@ -86,22 +85,19 @@ class _HomePageState extends State<HomePage> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(16),
                                       child: Image.network(
-                                          "${request.urlData.poster}${request.topMovies![1].background}"),
+                                          "${request.urlData.poster}${request.topMovies![1].background}", 
+                                          fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
+                                            if(loadingProgress == null){
+                                              return child;
+                                            }else{
+                                              return const Center(
+                                                child: CircularProgressIndicator(color: Colors.red,),
+                                              );
+                                            }
+                                          },),
                                     ),
                                   ),
                                 )),
-                            Text(
-                              request.topMovies![1].title,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 22),
-                            ),
-                          ] else ...[
-                            const Padding(
-                                padding: EdgeInsets.only(top: 300),
-                                child: CircularProgressIndicator(
-                                  color: Colors.red,
-                                ))
-                          ],
                           const Padding(
                             padding: EdgeInsets.all(10),
                             child: Align(
@@ -114,13 +110,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: 320,
+                            height: 250,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
                                         if (request.moviesNowPlaying !=
@@ -130,31 +126,45 @@ class _HomePageState extends State<HomePage> {
                                               movieSelected = request
                                                   .moviesNowPlaying![index];
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const MoviePage()));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const MoviePage(),
+                                                ),
+                                              );
                                             },
                                             child: SizedBox(
-                                              height: 180,
-                                              width: 120,
+                                              height: 210,
                                               child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  child: Image.network(
-                                                      '${request.urlData.poster}${request.moviesNowPlaying![index].poster}')),
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: Image.network(
+                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}',
+                                                  fit: BoxFit.cover,
+                                                  loadingBuilder:
+                                                      (BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                              loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    } else {
+                                                      return const Center(
+                                                        child: SizedBox(
+                                                          width: 40,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: Colors.red,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              request.moviesNowPlaying![index]
-                                                  .title,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
-                                          )
                                         ] else ...[
                                           const Padding(
                                               padding:
@@ -179,13 +189,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 320,
+                            height: 250,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
                                         if (request.topMovies != null) ...[
@@ -200,23 +210,21 @@ class _HomePageState extends State<HomePage> {
                                                           const MoviePage()));
                                             },
                                             child: SizedBox(
-                                                height: 180,
-                                                width: 120,
+                                                height: 210,
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   child: Image.network(
-                                                      "${request.urlData.poster}${request.topMovies![index].poster}"),
+                                                      "${request.urlData.poster}${request.topMovies![index].poster}", fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
+                                                        if(loadingProgress == null){
+                                                          return child;
+                                                        }else{ 
+                                                          return const Center(
+                                                            child: CircularProgressIndicator(color: Colors.red),
+                                                          );
+                                                          }
+                                                      },),
                                                 )),
-                                          ),
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              request.topMovies![index].title,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
                                           ),
                                         ] else ...[
                                           const Padding(
@@ -242,13 +250,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 320,
+                            height: 250,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.trendingMovies!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
                                         if (request.trendingMovies != null) ...[
@@ -263,25 +271,23 @@ class _HomePageState extends State<HomePage> {
                                                             const MoviePage()));
                                               },
                                               child: SizedBox(
-                                                width: 120,
-                                                height: 180,
+                                                height: 210,
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   child: Image.network(
-                                                      "${request.urlData.poster}${request.trendingMovies![index].poster}"),
+                                                      "${request.urlData.poster}${request.trendingMovies![index].poster}",
+                                                      fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
+                                                        if(loadingProgress == null){
+                                                          return child;
+                                                        }else{
+                                                          return const Center(
+                                                            child: CircularProgressIndicator(color: Colors.red,),
+                                                          );
+                                                        }
+                                                      },),
                                                 ),
                                               )),
-                                          SizedBox(
-                                            width: 120,
-                                            child: Text(
-                                              request
-                                                  .trendingMovies![index].title,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
-                                            ),
-                                          )
                                         ] else ...[
                                           const Padding(
                                               padding:
