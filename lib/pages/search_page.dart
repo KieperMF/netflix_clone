@@ -70,8 +70,13 @@ class _SearchPageState extends State<SearchPage> {
                                     children: [
                                       TextButton(
                                         onPressed: () {
-                                          movieSelected = _request.searchMovies![index];
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MoviePage()));
+                                          movieSelected =
+                                              _request.searchMovies![index];
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const MoviePage()));
                                         },
                                         child: SizedBox(
                                           height: 250,
@@ -79,19 +84,24 @@ class _SearchPageState extends State<SearchPage> {
                                             borderRadius:
                                                 BorderRadius.circular(16),
                                             child: Image.network(
-                                                "${_request.urlData.poster}${_request.searchMovies![index].poster}"),
+                                                "${_request.urlData.poster}${_request.searchMovies![index].poster}",
+                                                fit: BoxFit.cover,
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              } else {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.red,
+                                                  ),
+                                                );
+                                              }
+                                            }),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 130,
-                                        child: Text(
-                                          _request.searchMovies![index].title,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      )
                                     ],
                                   ),
                                 );
@@ -122,23 +132,38 @@ class _SearchPageState extends State<SearchPage> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: 250,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          child: Image.network(
-                                              "${_request.urlData.poster}${_request.trendingMovies![index].poster}"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 130,
-                                        child: Text(
-                                          _request.trendingMovies![index].title,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      )
+                                          height: 290,
+                                          child: TextButton(
+                                            onPressed: () {
+                                              movieSelected = _request
+                                                  .trendingMovies![index];
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const MoviePage()));
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              child: Image.network(
+                                                  "${_request.urlData.poster}${_request.trendingMovies![index].poster}",
+                                                  fit: BoxFit.cover,
+                                                  loadingBuilder: (context,
+                                                      child, loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                } else {
+                                                  return const Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.red,
+                                                    ),
+                                                  );
+                                                }
+                                              }),
+                                            ),
+                                          )),
                                     ],
                                   ),
                                 );
