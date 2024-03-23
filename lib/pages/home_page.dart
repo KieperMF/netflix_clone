@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black.withOpacity(0.7),
         title: const Align(
           alignment: Alignment.topLeft,
           child: Text(

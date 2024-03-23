@@ -15,7 +15,7 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.black.withOpacity(0.7),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         backgroundColor: Colors.grey[900],
@@ -69,11 +69,14 @@ class _MoviePageState extends State<MoviePage> {
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 20)),
                       ),
-                      SizedBox(
-                        width: 350,
-                        child: Text("Sinpse: ${movieSelected!.overview}",
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 20)),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 50),
+                        child: SizedBox(
+                          width: 350,
+                          child: Text("Sinpse: ${movieSelected!.overview}",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20)),
+                        ),
                       )
                     ]
                   ],
