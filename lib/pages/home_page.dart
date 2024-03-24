@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/pages/search_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
@@ -63,41 +64,49 @@ class _HomePageState extends State<HomePage> {
                         request.topMovies != null) {
                       return Column(
                         children: [
-                            Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: TextButton(
-                                  onPressed: () {
-                                    movieSelected = request.topMovies![1];
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MoviePage()));
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(
-                                        color: Colors.white,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: Image.network(
-                                          "${request.urlData.poster}${request.topMovies![1].background}", 
-                                          fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
-                                            if(loadingProgress == null){
-                                              return child;
-                                            }else{
-                                              return const Center(
-                                                child: CircularProgressIndicator(color: Colors.red,),
-                                              );
-                                            }
-                                          },),
+                          Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: TextButton(
+                                onPressed: () {
+                                  movieSelected = request.topMovies![1];
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MoviePage()));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2,
                                     ),
                                   ),
-                                )),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Image.network(
+                                      "${request.urlData.poster}${request.topMovies![1].background}",
+                                      fit: BoxFit.cover,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return const Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(50),
+                                              child: CircularProgressIndicator(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              )),
                           const Padding(
                             padding: EdgeInsets.all(10),
                             child: Align(
@@ -150,11 +159,12 @@ class _HomePageState extends State<HomePage> {
                                                         null) {
                                                       return child;
                                                     } else {
-                                                      return const Center(
-                                                        child: SizedBox(
+                                                      return Center(
+                                                        child: Container(
+                                                          color: Colors.grey,
                                                           width: 40,
                                                           child:
-                                                              CircularProgressIndicator(
+                                                              const CircularProgressIndicator(
                                                             color: Colors.red,
                                                           ),
                                                         ),
@@ -215,15 +225,24 @@ class _HomePageState extends State<HomePage> {
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   child: Image.network(
-                                                      "${request.urlData.poster}${request.topMovies![index].poster}", fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
-                                                        if(loadingProgress == null){
-                                                          return child;
-                                                        }else{ 
-                                                          return const Center(
-                                                            child: CircularProgressIndicator(color: Colors.red),
-                                                          );
-                                                          }
-                                                      },),
+                                                    "${request.urlData.poster}${request.topMovies![index].poster}",
+                                                    fit: BoxFit.cover,
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      } else {
+                                                        return const Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                                  color: Colors
+                                                                      .red),
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
                                                 )),
                                           ),
                                         ] else ...[
@@ -276,16 +295,24 @@ class _HomePageState extends State<HomePage> {
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   child: Image.network(
-                                                      "${request.urlData.poster}${request.trendingMovies![index].poster}",
-                                                      fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
-                                                        if(loadingProgress == null){
-                                                          return child;
-                                                        }else{
-                                                          return const Center(
-                                                            child: CircularProgressIndicator(color: Colors.red,),
-                                                          );
-                                                        }
-                                                      },),
+                                                    "${request.urlData.poster}${request.trendingMovies![index].poster}",
+                                                    fit: BoxFit.cover,
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      } else {
+                                                        return const Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: Colors.red,
+                                                          ),
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
                                                 ),
                                               )),
                                         ] else ...[
