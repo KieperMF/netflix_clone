@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/pages/search_page.dart';
 import 'package:flutter_flix/request/http_request.dart';
@@ -159,14 +158,10 @@ class _HomePageState extends State<HomePage> {
                                                         null) {
                                                       return child;
                                                     } else {
-                                                      return Center(
-                                                        child: Container(
-                                                          color: Colors.grey,
-                                                          width: 40,
-                                                          child:
-                                                              const CircularProgressIndicator(
-                                                            color: Colors.red,
-                                                          ),
+                                                      return const Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: Colors.red,
                                                         ),
                                                       );
                                                     }
