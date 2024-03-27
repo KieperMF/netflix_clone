@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flix/pages/movie_page.dart';
 import 'package:flutter_flix/pages/search_page.dart';
@@ -84,24 +85,17 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
-                                    child: Image.network(
-                                      "${request.urlData.poster}${request.topMovies![1].background}",
-                                      fit: BoxFit.cover,
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        } else {
-                                          return const Center(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(50),
-                                              child: CircularProgressIndicator(
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      },
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          "${request.urlData.poster}${request.topMovies![1].background}",
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        color: Colors.red,
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                 ),
@@ -127,57 +121,46 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
-                                        if (request.moviesNowPlaying !=
-                                            null) ...[
-                                          TextButton(
-                                            onPressed: () {
-                                              movieSelected = request
-                                                  .moviesNowPlaying![index];
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const MoviePage(),
+                                        TextButton(
+                                          onPressed: () {
+                                            movieSelected = request
+                                                .moviesNowPlaying![index];
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MoviePage(),
+                                              ),
+                                            );
+                                          },
+                                          child: SizedBox(
+                                            height: 210,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    "${request.urlData.poster}${request.moviesNowPlaying![index].poster}",
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        SizedBox(
+                                                  height: 30,
+                                                  width: 30,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
-                                              );
-                                            },
-                                            child: SizedBox(
-                                              height: 210,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.network(
-                                                  '${request.urlData.poster}${request.moviesNowPlaying![index].poster}',
-                                                  fit: BoxFit.cover,
-                                                  loadingBuilder:
-                                                      (BuildContext context,
-                                                          Widget child,
-                                                          ImageChunkEvent?
-                                                              loadingProgress) {
-                                                    if (loadingProgress ==
-                                                        null) {
-                                                      return child;
-                                                    } else {
-                                                      return const Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: Colors.red,
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
-                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
                                               ),
                                             ),
                                           ),
-                                        ] else ...[
-                                          const Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 300),
-                                              child: CircularProgressIndicator(
-                                                color: Colors.red,
-                                              ))
-                                        ]
+                                        ),
                                       ],
                                     ),
                                   );
@@ -203,51 +186,38 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
-                                        if (request.topMovies != null) ...[
-                                          TextButton(
-                                            onPressed: () {
-                                              movieSelected =
-                                                  request.topMovies![index];
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const MoviePage()));
-                                            },
-                                            child: SizedBox(
-                                                height: 210,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  child: Image.network(
-                                                    "${request.urlData.poster}${request.topMovies![index].poster}",
-                                                    fit: BoxFit.cover,
-                                                    loadingBuilder: (context,
-                                                        child,
-                                                        loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      } else {
-                                                        return const Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                                  color: Colors
-                                                                      .red),
-                                                        );
-                                                      }
-                                                    },
+                                        TextButton(
+                                          onPressed: () {
+                                            movieSelected =
+                                                request.topMovies![index];
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const MoviePage()));
+                                          },
+                                          child: SizedBox(
+                                              height: 210,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      "${request.urlData.poster}${request.topMovies![index].poster}",
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    color: Colors.red,
                                                   ),
-                                                )),
-                                          ),
-                                        ] else ...[
-                                          const Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 300),
-                                              child: CircularProgressIndicator(
-                                                color: Colors.red,
-                                              ))
-                                        ]
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      const Icon(Icons.error),
+                                                ),
+                                              )),
+                                        ),
                                       ],
                                     ));
                               },
@@ -273,51 +243,42 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(5),
                                     child: Column(
                                       children: [
-                                        if (request.trendingMovies != null) ...[
-                                          TextButton(
-                                              onPressed: () {
-                                                movieSelected = request
-                                                    .trendingMovies![index];
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const MoviePage()));
-                                              },
-                                              child: SizedBox(
-                                                height: 210,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  child: Image.network(
-                                                    "${request.urlData.poster}${request.trendingMovies![index].poster}",
-                                                    fit: BoxFit.cover,
-                                                    loadingBuilder: (context,
-                                                        child,
-                                                        loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      } else {
-                                                        return const Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            color: Colors.red,
-                                                          ),
-                                                        );
-                                                      }
-                                                    },
+                                        TextButton(
+                                            onPressed: () {
+                                              movieSelected = request
+                                                  .trendingMovies![index];
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const MoviePage()));
+                                            },
+                                            child: SizedBox(
+                                              height: 210,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      "${request.urlData.poster}${request.trendingMovies![index].poster}",
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SizedBox(
+                                                    height: 30,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: downloadProgress
+                                                          .progress,
+                                                      color: Colors.red,
+                                                    ),
                                                   ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      const Icon(Icons.error),
                                                 ),
-                                              )),
-                                        ] else ...[
-                                          const Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 300),
-                                              child: CircularProgressIndicator(
-                                                color: Colors.red,
-                                              ))
-                                        ]
+                                              ),
+                                            )),
                                       ],
                                     ),
                                   );
