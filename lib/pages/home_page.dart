@@ -92,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                                           (context, url, downloadProgress) =>
                                               CircularProgressIndicator(
                                         value: downloadProgress.progress,
-                                        color: Colors.red,
+                                        color: const Color.fromARGB(
+                                            255, 224, 23, 9),
                                       ),
                                       errorWidget: (context, url, error) =>
                                           const Icon(Icons.error),
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            height: 250,
+                            height: 240,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.moviesNowPlaying!.length,
@@ -141,19 +142,17 @@ class _HomePageState extends State<HomePage> {
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     "${request.urlData.poster}${request.moviesNowPlaying![index].poster}",
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        SizedBox(
-                                                  height: 30,
-                                                  width: 30,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    value: downloadProgress
-                                                        .progress,
-                                                    color: Colors.red,
-                                                  ),
-                                                ),
+                                                placeholder: (context, url) =>
+                                                    Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: const SizedBox(
+                                                            width: 40,
+                                                            height: 40,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: Colors.red,
+                                                            ))),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         const Icon(Icons.error),
@@ -177,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 250,
+                            height: 240,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: request.topMovies!.length,
@@ -204,14 +203,18 @@ class _HomePageState extends State<HomePage> {
                                                 child: CachedNetworkImage(
                                                   imageUrl:
                                                       "${request.urlData.poster}${request.topMovies![index].poster}",
-                                                  progressIndicatorBuilder: (context,
-                                                          url,
-                                                          downloadProgress) =>
-                                                      CircularProgressIndicator(
-                                                    value: downloadProgress
-                                                        .progress,
-                                                    color: Colors.red,
-                                                  ),
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: const SizedBox(
+                                                              width: 40,
+                                                              height: 40,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color:
+                                                                    Colors.red,
+                                                              ))),
                                                   errorWidget: (context, url,
                                                           error) =>
                                                       const Icon(Icons.error),
@@ -234,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           SizedBox(
-                            height: 250,
+                            height: 240,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: request.trendingMovies!.length,
@@ -261,18 +264,18 @@ class _HomePageState extends State<HomePage> {
                                                 child: CachedNetworkImage(
                                                   imageUrl:
                                                       "${request.urlData.poster}${request.trendingMovies![index].poster}",
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          SizedBox(
-                                                    height: 30,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      value: downloadProgress
-                                                          .progress,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: const SizedBox(
+                                                              width: 40,
+                                                              height: 40,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color:
+                                                                    Colors.red,
+                                                              ))),
                                                   errorWidget: (context, url,
                                                           error) =>
                                                       const Icon(Icons.error),
